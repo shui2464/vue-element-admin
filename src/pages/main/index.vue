@@ -28,11 +28,6 @@ export default {
     return {
       main: ''
     }
-  },
-  watch: {
-    '$route' (val) {
-      console.log(val)
-    }
   }
 }
 </script>

@@ -1,16 +1,16 @@
 <template>
   <el-menu class="aside-menu" active-text-color='#000000'>
-    <el-submenu class="aside-sub-menu" index='1'>
+    <el-submenu class="aside-sub-menu" index='submenu.name' v-for="submenu in menuItemList" :key="submenu.name">
       <template slot="title">
         <i class="el-icon-location"></i>
-        <span>导航一</span>
+        <span>{{submenu.meta && submenu.meta.title}}</span>
       </template>
       <el-menu-item
         class="aside-menu-item"
-        :index="item.idx"
-        v-for="item in menuItemList"
-        :key="item.idx"
-      >{{ item.title }}</el-menu-item>
+        :index="item.name"
+        v-for="item in submenu.children"
+        :key="item.name"
+      >{{ item.meta && item.meta.title }}</el-menu-item>
     </el-submenu>
   </el-menu>
 </template>
@@ -22,14 +22,12 @@ export default {
   data() {
     return {}
   },
-  watch: {
-    '$route' (val) {
-      console.log(val)
-    }
+  mounted() {
+    console.log(this.menuItemList)
   },
   computed: {
     ...mapGetters({
-      menuItemList: 'getRouterList'
+      menuItemList: 'permissionRoutes'
     })
   }
 };

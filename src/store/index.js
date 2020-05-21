@@ -1,24 +1,24 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import getters from './getters'
 
 Vue.use(Vuex)
 
+const modulesFiles = require.context('./modules', true, /\.js$/)
+
+// you do not need `import app from './modules/app'`
+// it will auto require all vuex module from modules file
+const modules = modulesFiles.keys().reduce((modules, modulePath) => {
+  // set './app.js' => 'app'
+  const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
+  const value = modulesFiles(modulePath)
+  modules[moduleName] = value.default
+  return modules
+}, {})
+
 const store = new Vuex.Store({
-  state: {
-    routerList: [
-      { idx: "1-1", title: "1-1" },
-      { idx: "1-2", title: "1-2" },
-      { idx: "1-3", title: "1-3" },
-      { idx: "1-4", title: "1-4" },
-      { idx: "1-5", title: "1-5" },
-      { idx: "1-6", title: "1-6" }
-    ]
-  },
-  getters: {
-    getRouterList: state => {
-      return state.routerList
-    }
-  }
+  modules,
+  getters
 })
 
 export default store;
