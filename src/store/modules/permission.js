@@ -1,4 +1,4 @@
-import { constantRoutes, permissionsRoutes } from '../../router/routes'
+import { permissionsRoutes } from '@/router/routes'
 
 export default {
   namespaced: true,

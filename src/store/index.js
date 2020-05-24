@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+// import createLogger from 'vuex/dist/logger'
 import getters from './getters'
 
 Vue.use(Vuex)
@@ -17,6 +18,7 @@ const modules = modulesFiles.keys().reduce((modules, modulePath) => {
 }, {})
 
 const store = new Vuex.Store({
+  // plugins: [createLogger()],
   modules,
   getters
 })

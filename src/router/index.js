@@ -5,8 +5,16 @@ import routes from './routes'
 Vue.use(Router)
 
 const router = new Router({
-  mode: 'hash',
+  mode: 'history',
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.path === from.path) {
+    return false
+  }
+  next()
+})
+
 
 export default router
