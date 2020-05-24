@@ -27,7 +27,8 @@ export const permissionsRoutes = [
         component: () => import('@/pages/dashboard'),
         meta: {
           title: '首页',
-          icon: 'el-icon-date'
+          icon: 'el-icon-date',
+          lockNavbar: true
         }
       }
     ]
@@ -81,7 +82,8 @@ export const permissionsRoutes = [
         name: 'document',
         meta: {
           title: '文档',
-          icon: 'el-icon-document'
+          icon: 'el-icon-document',
+          lockNavbar: true
         },
         component: () => import('@/pages/document')
       }
@@ -129,7 +131,7 @@ export const moveInMain = permissionsRoutes => {
   return {
     path: '/',
     name: '_main',
-    redirect: '/_dashboard',
+    redirect: '/dashboard',
     meta: {
       title: '首页',
       icon: 'el-icon-d-caret'

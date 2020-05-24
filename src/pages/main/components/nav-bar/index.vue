@@ -1,13 +1,15 @@
 <template>
   <div class="nav-bar">
     <el-tag 
-      class="el-tag-active"
-      closable
-      v-for="(tag, key) in mapActiveRoute"
+      :class="{ 'el-tag-active': route.name === currentRoute.name }"
+      :closable="!route.meta.lockNavbar"
+      v-for="(route, key) in mapActiveRoute"
       :key="key"
+      @click="handleClickTag(route)"
+      @close="handleCloseTag(route)"
     >
       <i class="el-tag-active-circle"></i>
-      {{ tag.name }}
+      {{ route.meta && route.meta.title }}
     </el-tag>
   </div>
 </template>
@@ -17,10 +19,34 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'nav-bar',
   data() {
-    return {}
+    return {
+      currentRoute: null
+    }
+  },
+  watch: {
+    $route(route) {
+      this.currentRoute = route
+    },
+    mapActiveRoute(list) {
+      const len = list.length
+      if (len) {
+        this.currentRoute = list[len - 1]
+      }
+    }
+  },
+  mounted() {
+    this.currentRoute = this.$route
   },
   computed: {
     ...mapGetters(['mapActiveRoute'])
+  },
+  methods: {
+    handleClickTag(route) {
+      this.$router.push(route.path)
+    },
+    handleCloseTag(route) {
+      this.$store.dispatch('activeRoute/deleteRoute', route)
+    }
   }
 }
 </script>
