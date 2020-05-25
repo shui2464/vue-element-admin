@@ -13,7 +13,7 @@ export const constantRoutes = [
 // permissions 约束路由
 export const permissionsRoutes = [
   {
-    path: '/_dashboard',
+    path: '/',
     name: '_dashboard',
     redirect: '/dashboard',
     component: () => import('@/pages/main'),

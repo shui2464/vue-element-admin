@@ -7,6 +7,10 @@ module.exports = {
       {
         test: /\.less$/,
         use: ['less-loader']
+      },
+      {
+        test: /\.jfif$/,
+        use: ['file-loader']
       }
     ]
   },

@@ -11,7 +11,9 @@
         </el-header>
         <el-main class="wrapper-main">
           <NavBar />
-          <router-view />
+          <transition name='main-wrapper'>
+            <router-view />
+          </transition>
         </el-main>
       </el-container>
     </el-container>
@@ -68,5 +70,6 @@ export default {
   }
   .wrapper-main {
     height: calc(100vh - 60px);
+    overflow: hidden;
   }
 </style>

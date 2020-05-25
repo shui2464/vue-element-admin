@@ -45,7 +45,8 @@ export default {
   name: "aside-menu",
   computed: {
     ...mapGetters({
-      menuItemList: "permissionRoutes"
+      menuItemList: "permissionRoutes",
+      activeRoute: "mapActiveRoute"
     }),
     isCollapse() {
       return this.$store.state.global.isCollapse
@@ -61,6 +62,11 @@ export default {
       }
     },
     handleSelectMenu(index, indexPath) {
+      if (!this.$store.state.activeRoute.isShowNavbar) return
+      if (this.activeRoute.length === this.$store.state.activeRoute.activeMaxLen) {
+        this.$message.warning('超过打开限制！')
+        return
+      }
       this.$store.dispatch('activeRoute/pushRoute', this.doFilterRoute(index, indexPath))
     }
   }

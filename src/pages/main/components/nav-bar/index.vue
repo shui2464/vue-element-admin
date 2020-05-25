@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-bar">
+  <div class="nav-bar" v-show="isShowNavbar">
     <el-tag 
       :class="{ 'el-tag-active': route.name === currentRoute.name }"
       :closable="!route.meta.lockNavbar"
@@ -38,7 +38,10 @@ export default {
     this.currentRoute = this.$route
   },
   computed: {
-    ...mapGetters(['mapActiveRoute'])
+    ...mapGetters(['mapActiveRoute']),
+    isShowNavbar() {
+      return this.$store.state.activeRoute.isShowNavbar
+    }
   },
   methods: {
     handleClickTag(route) {

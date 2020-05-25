@@ -7,6 +7,7 @@
     </div>
     <div class="header-nav-right">
       <i class="el-icon-rank control-icon" @click="handleScreenFull"></i>
+      <UserManager />
     </div>
   </div>
 </template>
@@ -14,10 +15,12 @@
 <script>
 import BreadCrumb from './components/breadcrumb'
 import screenfull from 'screenfull'
+import UserManager from './components/user-manager'
 export default {
   name: 'header-nav',
   components: {
-    BreadCrumb
+    BreadCrumb,
+    UserManager
   },
   computed: {
     isCollapse() {
@@ -49,7 +52,6 @@ export default {
     align-items: center;
     width: 100%;
     height: 100%;
-    line-height: 60px;
     padding: 0 20px;
     box-sizing: border-box;
     border-left: 1px solid #E3BB92;
@@ -59,9 +61,11 @@ export default {
     }
     .header-nav-left {
       justify-content: flex-start;
+      align-items: center;
     }
     .header-nav-right {
       justify-content: flex-end;
+      align-items: center;
     }
   }
   .control-icon {
